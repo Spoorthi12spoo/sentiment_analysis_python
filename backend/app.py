@@ -38,7 +38,7 @@ def analyze_sentiment(text):
     return {"text": text, "polarity": polarity, "subjectivity": subjectivity, "sentiment": sentiment}
 
 # Admin login API
-@app.route('/api/admin/login', methods=['POST'])
+@app.route('/api/adminlogin', methods=['POST'])
 def admin_login():
     data = request.json
     email = data.get('email')
@@ -101,6 +101,10 @@ def get_analysis_data():
     cursor.execute("SELECT polarity, subjectivity FROM analyses")
     data = cursor.fetchall()
     return jsonify(data), 200
+
+@app.route('/')
+def home():
+    return "Flask backend running!"
 
 if __name__ == "__main__":
     app.run(debug=True)

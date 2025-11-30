@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,21 +15,25 @@ function AdminLogin() {
     setMessage(null);
 
     try {
-      const response = await fetch('http://localhost:5000/adminlogin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://127.0.0.1:5000/api/adminlogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(data.message || 'Login successful');
+        // Save login state
+        localStorage.setItem("isAdminLoggedIn", "true");
+
+        // redirect to user input page
+        navigate("/user-input");
       } else {
-        setMessage(data.message || 'Invalid credentials');
+        setMessage(data.message || "Invalid credentials");
       }
     } catch (error) {
-      setMessage('Error connecting to server');
+      setMessage("Error connecting to server");
     }
 
     setLoading(false);
@@ -35,6 +42,7 @@ function AdminLogin() {
   return (
     <div style={{ maxWidth: "400px", margin: "auto", marginTop: "50px" }}>
       <h2>Admin Login</h2>
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -66,14 +74,12 @@ function AdminLogin() {
             cursor: "pointer",
           }}
         >
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
 
       {message && (
-        <p style={{ marginTop: "15px", color: message.includes('success') ? "green" : "red" }}>
-          {message}
-        </p>
+        <p style={{ marginTop: "15px", color: "red" }}>{message}</p>
       )}
     </div>
   );

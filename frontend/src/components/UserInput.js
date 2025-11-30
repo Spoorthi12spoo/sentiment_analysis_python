@@ -29,15 +29,45 @@ function UserInput() {
 
   return (
     <div style={{maxWidth: "600px", margin: "auto", marginTop: "30px"}}>
-      <h2>User Input - Sentiment Analysis</h2>
+      <h2>Data Upload - Sentiment Analysis</h2>
       <form onSubmit={handleTextSubmit}>
         <textarea rows="4" placeholder="Enter text here..." value={text} onChange={e => setText(e.target.value)} style={{width: "100%", padding: "10px"}}></textarea>
-        <button type="submit" style={{marginTop: "10px", padding: "10px"}}>Analyze Text</button>
+       <button
+  type="submit"
+  style={{
+    marginTop: "10px",
+    padding: "10px",
+    backgroundColor: "#4a90e2", // Blue color
+    color: "white",             // White text
+    border: "none",
+    borderRadius: "3px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Analyze Text
+</button>
+
       </form>
       <hr />
       <form onSubmit={handleFileSubmit}>
         <input type="file" accept=".csv" onChange={handleFileChange} />
-        <button type="submit" style={{marginLeft: "10px", padding: "10px"}}>Upload CSV</button>
+      <button
+  type="submit"
+  style={{
+    marginLeft: "10px",
+    padding: "10px",
+    backgroundColor: "#4a90e2", // Blue shade
+    color: "white",             // White text
+    border: "none",
+    borderRadius: "3px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Upload CSV
+</button>
+
       </form>
       <hr />
       {results && <div>
