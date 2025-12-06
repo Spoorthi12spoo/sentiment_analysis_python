@@ -22,7 +22,7 @@ function Navbar() {
         )}
         {isAdminLoggedIn && (
           <>
-            <Link to="/user-input" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Data Upload</Link>
+            <Link to="/admin-input" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Data Upload</Link>
             <Link to="/analysis" style={{ margin: "0 10px", color: "white", textDecoration: "none" }}>Analysis</Link>
             <button
               onClick={() => {

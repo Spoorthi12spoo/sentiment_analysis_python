@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
@@ -8,6 +8,14 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isAdminLoggedIn") === "true";
+    if (isLoggedIn) {
+      navigate("/user-input");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +35,7 @@ function AdminLogin() {
         // Save login state
         localStorage.setItem("isAdminLoggedIn", "true");
 
-        // redirect to user input page
+        // Redirect to user input page
         navigate("/user-input");
       } else {
         setMessage(data.message || "Invalid credentials");

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import AdminLogin from './components/AdminLogin';
-import UserInput from './components/UserInput';
+import AdminInput from './components/AdminInput';
 import AnalysisPage from './components/AnalysisPage';
 
 // Wrapper for protecting pages
@@ -18,20 +18,28 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route
+          path="/admin-login"
+          element={
+            localStorage.getItem("isAdminLoggedIn") === "true" ? (
+              <Navigate to="/user-input" />
+            ) : (
+              <AdminLogin />
+            )
+          }
+        />
 
-        <Route path="/admin-login" element={<AdminLogin />} />
-
-        {/* Protected Pages */}
+        {/* Protected Routes */}
         <Route
           path="/user-input"
           element={
             <ProtectedRoute>
-              <UserInput />
+              <AdminInput />
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/analysis"
           element={
@@ -40,6 +48,9 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Redirect unknown routes */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
