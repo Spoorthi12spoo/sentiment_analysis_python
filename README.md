@@ -28,17 +28,14 @@ By analysing polarity, subjectivity and sentiment (positive / neutral / negative
   * cd backend
   * pip install -r requirements.txt
   * python app.py
+    
 2️⃣ Start Frontend (React)
   * cd frontend
   * npm install
   * npm start
 
-## **Why Admin Login?**
 
-Only the admin can analyze text or upload a CSV file. This is because the project is designed for real-world company usage. In companies, sentiment analysis is usually done on customer feedback, which can be sensitive. So access is limited to the admin to keep the data secure.
-The results (polarity, subjectivity, and sentiment graphs) help companies understand customer opinions and make improvements to their products or services.
-
-## **Result **
+## Result 
 
 After login, the admin can:
 
